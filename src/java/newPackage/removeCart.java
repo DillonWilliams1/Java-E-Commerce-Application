@@ -45,11 +45,27 @@ public class removeCart extends HttpServlet {
             cartList.remove(index);
             // Update the session attribute
             session.setAttribute("cartList", cartList);
+            Subtotal(cartList, session);
         }
 
         // Redirect back to the original page
         
         response.sendRedirect("Cart.jsp");
+    }
+     private void Subtotal(List<Cart> cartList, HttpSession session) {
+
+    if (cartList == null || cartList.isEmpty()) {
+
+        session.setAttribute("subtotal", 0.0);
+        return;
+    }
+
+        double subtotal = 0;
+        for (Cart cart : cartList) {
+            subtotal += cart.getPrice() * cart.getQuantity();
+        }
+        session.setAttribute("subtotal", subtotal);
+        
     }
     
 
