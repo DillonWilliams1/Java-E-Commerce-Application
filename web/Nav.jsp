@@ -39,8 +39,11 @@
           <span class="badge badge-sm indicator-item"><%= cartSize %></span>
         </div>
       </div>
-        <%
-    double subtotal = (Double) session.getAttribute("subtotal");
+         <%
+     Double subtotal = (Double) session.getAttribute("subtotal");
+    if (subtotal == null) {
+        subtotal = 0.0;
+    }
      %>
         
       <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
